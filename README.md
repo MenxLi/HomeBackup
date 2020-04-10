@@ -32,7 +32,7 @@ $ ./backUpHome.py -rpf            # git pull -> restore files (All backup files 
 ```
 ```
 # Example
-# Back up files into --{/Path/ToStore/Backup/Files}/Backup-- and call git add --all->commit -m "{Time}"->push
+# Back up files into --{/Path/ToStore/Backup/Files}/Backup-- => git add --all => commit -m "{Time}" => push
 $ ./backUpHome.py -gp                                                         
 >>
 * </home/{User}/.home/Backup/.vimrc> Updated                        
