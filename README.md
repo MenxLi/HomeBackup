@@ -29,7 +29,9 @@ $ ./backUpHome.py -gpm "Message"  # Backup files -> git add -> commit -m "Messag
 $ ./backUpHome.py -r              # Restore files
 $ ./backUpHome.py -rp             # git pull -> restore files
 $ ./backUpHome.py -rpf            # git pull -> restore files (All backup files will be copied to designated destination even if some files do not exist in current computer)
-
+```
+```
+# Example
 # Back up files into --{/Path/ToStore/Backup/Files}/Backup-- and call git add --all->commit -m "{Time}"->push
 $ ./backUpHome.py -gp                                                         
 >>
