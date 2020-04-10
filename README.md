@@ -20,12 +20,12 @@ $ sudo chmod 755 backUpHome.py
 
 #### Usage
 ```bash
-# Back up files into --{/Path/ToStore/Backup/Files}/Backup-- and call git add->commit->push
+# Back up files into --{/Path/ToStore/Backup/Files}/Backup-- and call git add-\>commit-\>push
 $ ./backUpHome.py -gp                                                         
 >>
-* </home/{User}>/.home/Backup/.vimrc> Updated                        
-+ </home/{User}>/.home/Backup/.config/Code/User/settings.json> Created     
-? </home/{User}>/.zshrc> not exists                                        
+\* \</home/{User}/.home/Backup/.vimrc\> Updated                        
++ \</home/{User}/.home/Backup/.config/Code/User/settings.json\> Created     
+? \</home/{User}/.zshrc\> not exists                                        
 ...  
 [master 82e7c70] 2020-04-10 00:30:48.914778 @ Auto commit                   
 11  2 files changed, 10 insertions(+), 5 deletions(-)  
