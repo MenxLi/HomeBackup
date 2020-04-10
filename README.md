@@ -40,5 +40,5 @@ $ ./backUpHome.py -gp
   ? </home/{User}/.zshrc> not exists                                        
   ...  
   [master 82e7c70] 2020-04-10 00:30:48.914778 @ Auto commit                   
-  11  2 files changed, 10 insertions(+), 5 deletions(-)  
+  2 files changed, 10 insertions(+), 5 deletions(-)  
 ```
