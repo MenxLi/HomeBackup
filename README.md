@@ -32,7 +32,7 @@ $ ./backUpHome.py -gp
 
 # Back up
 $ ./backUpHome.py                 # Simply backup files
-$ ./backUpHome.py -g              # Backup files -> git add -> commit
+$ ./backUpHome.py -g              # Backup files -> git add -> commit -m "{Time}"
 $ ./backUpHome.py -gm "Message"   # Backup files -> git add -> commit -m "Message"
 $ ./backUpHome.py -gpm "Message"  # Backup files -> git add -> commit -m "Message" -> push
 # Restore
