@@ -5,7 +5,7 @@ This lightweight scripts can backup or restore files configured in `config.py` w
 
 **Note:**
 * Only work with linux
-* All files to be backed up should be under (sub-directories of) $HOME
+* All files to be backed up should be under (sub-directories of) `$HOME`
 * Git and git remote have to be set up in `{/Path/ToStore/Backup/Files}` before calling related funtions
 
 ## Installation and Usage
