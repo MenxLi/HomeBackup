@@ -61,7 +61,7 @@ class BackUp(BackUp_Base):
             os.system("cp -r {} {}".format(f_path, dst_path))
 
     def createFolder(self, dst_path):
-        """Creat correspounding folder, no matter whether the base/parent folders exists"""
+        """Creat dst_path, no matter whether the base/parent folders exists"""
         if os.path.exists(dst_path):
             return
         else:
