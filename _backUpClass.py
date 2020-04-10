@@ -82,7 +82,7 @@ class Restore(BackUp_Base):
                 os.system("cp {} {}".format(file_path, self.HOME))
             elif os.path.isdir(file_path):
                 if (not os.path.exists(dst_path)) and (not force):
-                    print("{} not exists and is ignored, to force copy using ...")
+                    print("{} not exists and is ignored, to force copy using -rf")
                     continue
                 os.system("cp -r {} {}".format(file_path, self.HOME))
             print("{} -> {}".format(file_, dst_path))
