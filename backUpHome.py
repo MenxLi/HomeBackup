@@ -7,7 +7,7 @@ parser = argparse.ArgumentParser(description="\
     Copy and restore files in config.py\
     ")
 parser.add_argument("-g", "--git", 
-    help = "Back up and call git add all and commit <or> Pull and restore files",
+    help = "Back up and call git add all and commit",
     action = "store_true")
 parser.add_argument("-r", "--restore", \
     help = "Restore files instead of back up",\
