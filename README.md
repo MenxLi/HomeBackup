@@ -1,7 +1,7 @@
 # HomeBackup
 
 Want to put various configration files under git contorl but don't want to setup git everywhere? Try this!  
-This lightweight scripts can backup or restore files configured in `config.py` while calling git commands in one call.
+These lightweight scripts can backup or restore files configured in `config.py` while calling git commands in one call.
 
 **Note:**
 * Only work with linux
