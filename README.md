@@ -4,7 +4,7 @@ Want to put various configration files under git contorl but don't want to setup
 These lightweight scripts can backup or restore files configured in `config.py` while calling git commands in one call.
 
 **Note:**
-* Only work with linux
+* Work with Linux and Mac
 * All files to be backed up should be under (sub-directories of) `$HOME`
 * Git and git remote have to be set up in `{/Path/ToStore/Backup/Files}` before calling related functions
 
