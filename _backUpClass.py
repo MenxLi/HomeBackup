@@ -24,7 +24,7 @@ class BackUp(BackUp_Base):
         for path_ in file_path:
             p = path_.replace("~", self.HOME)
             self.abs_path.append(p)
-    
+
     def __call__(self, git = False, push = False, msg = ""):
         if not os.path.exists(self.backup_dir):
             print("Created directory: ", self.backup_dir)
@@ -78,12 +78,12 @@ class Restore(BackUp_Base):
         for file_ in os.listdir(self.backup_dir):
             file_path = os.path.abspath(os.path.join(self.backup_dir, file_))
             dst_path = os.path.join(self.HOME, file_)
+            if (not os.path.exists(dst_path)) and (not force):
+                print("{} not exists and is ignored, to force copy using -rf")
+                continue
             if os.path.isfile(file_path):
                 os.system("cp {} {}".format(file_path, self.HOME))
             elif os.path.isdir(file_path):
-                if (not os.path.exists(dst_path)) and (not force):
-                    print("{} not exists and is ignored, to force copy using -rf")
-                    continue
                 os.system("cp -r {} {}".format(file_path, self.HOME))
             print("{} -> {}".format(file_, dst_path))
 
