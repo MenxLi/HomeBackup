@@ -1,0 +1,34 @@
+{
+    "languageserver": {
+        "ccls": {
+            "command": "ccls",
+            "filetypes": [
+                "c",
+                "cpp",
+                "objc",
+                "objcpp"
+            ],
+            "rootPatterns": [
+                ".ccls",
+                "compile_commands.json",
+                ".vim/",
+                ".git/",
+                ".hg/"
+            ],
+            "initializationOptions": {
+                "cache": {
+                    "directory": "/tmp/ccls"
+                }
+            }
+        }
+    },
+    "python.linting.pylintArgs":[
+        "--disable=C0103",
+        "--disable=C0114",
+        "--disable=C0115",
+        "--disable=C0116"
+    ],
+    "python.venvPath":"~/Code/.venv",
+    "python.analysis.stubPath":"/home/monsoon/Documents/Code/.pystub/python-type-stubs",
+    "python.formatting.provider": "autopep8"
+}

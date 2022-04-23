@@ -1,0 +1,1 @@
+ vim nvim curl tmux git zsh tree zip unzip proxychains python3-venv python3-pip fzf neofetc
