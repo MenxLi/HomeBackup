@@ -122,7 +122,7 @@ class Restore(BasicConfig):
                     continue
 
             if (not os.path.exists(dst_path)) and (not force):
-                print("{} not exists and is ignored, to force copy using -f")
+                print("{} not exists and is ignored, to force copy using -f".format(dst_path))
                 continue
 
             if os.path.isfile(local_path):
