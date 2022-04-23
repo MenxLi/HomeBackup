@@ -1,26 +1,58 @@
 #!/usr/bin/python3
 
-import os, sys
-#from pathlib import Path
-import json
+import os, platform
 import datetime
 
 from config import file_path
 
+# https://stackoverflow.com/questions/510357/how-to-read-a-single-character-from-the-user
+class _Getch:
+    """Gets a single character from standard input.  Does not echo to the
+screen."""
+    def __init__(self):
+        try:
+            self.impl = _GetchWindows()
+        except ImportError:
+            self.impl = _GetchUnix()
 
-class BackUp_Base(object):
-    """Base class for BackUp and Restore"""
+    def __call__(self): return self.impl()
+
+class _GetchUnix:
+    def __init__(self):
+        import tty, sys
+
+    def __call__(self):
+        import sys, tty, termios
+        fd = sys.stdin.fileno()
+        old_settings = termios.tcgetattr(fd)
+        try:
+            tty.setraw(sys.stdin.fileno())
+            ch = sys.stdin.read(1)
+        finally:
+            termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+        return ch
+
+class _GetchWindows:
+    def __init__(self):
+        import msvcrt
+
+    def __call__(self):
+        import msvcrt
+        return msvcrt.getch()
+
+
+class BasicConfig:
     HOME = os.environ["HOME"]
     backup_dir = os.path.abspath(
-        os.path.join(os.path.dirname(__file__), "Backup")
+        os.path.join(os.path.dirname(os.path.realpath(__file__)), "files")
         )
-    def __init__(self):
-        pass
+    getch = _Getch()
 
-class BackUp(BackUp_Base):
-    def __init__(self):
+class BackUp(BasicConfig):
+    def __init__(self, query: bool = True):
         super().__init__()
         self.abs_path = []
+        self.query = query
         for path_ in file_path:
             p = path_.replace("~", self.HOME)
             self.abs_path.append(p)
@@ -35,7 +67,7 @@ class BackUp(BackUp_Base):
             date_time = datetime.datetime.now()
             os.system("git add --all")
             if msg == "":
-                os.system("git commit -m \"{} @ Auto commit\"".format(date_time))
+                os.system("git commit -m \"{} @ Auto commit from {}\"".format(date_time, platform.node()))
             else:
                 os.system("git commit -m \"{}\"".format(msg))
             if push:
@@ -45,6 +77,11 @@ class BackUp(BackUp_Base):
         if not os.path.exists(f_path):
             print("? <{}> not exits".format(f_path))
             return
+        if self.query:
+            print(f"Backup {f_path} ?(y/[else]): ")
+            ans = self.getch()
+            if ans != "y":
+                return
         # Creat folder
         dst_path = os.path.dirname(f_path).replace(self.HOME, self.backup_dir)   # directory to store files
         if not os.path.exists(dst_path):
@@ -69,21 +106,27 @@ class BackUp(BackUp_Base):
             self.createFolder(parent_path)
             os.mkdir(dst_path)
 
-class Restore(BackUp_Base):
-    def __init__(self):
-        pass
+class Restore(BasicConfig):
+    def __init__(self, query: bool = True):
+        self.query = query
     def __call__(self, pull = False, force = False):
         if pull:
             os.system("git pull")
         for file_ in os.listdir(self.backup_dir):
-            file_path = os.path.abspath(os.path.join(self.backup_dir, file_))
+            local_path = os.path.abspath(os.path.join(self.backup_dir, file_))
             dst_path = os.path.join(self.HOME, file_)
-            if (not os.path.exists(dst_path)) and (not force):
-                print("{} not exists and is ignored, to force copy using -rf")
-                continue
-            if os.path.isfile(file_path):
-                os.system("cp {} {}".format(file_path, self.HOME))
-            elif os.path.isdir(file_path):
-                os.system("cp -r {} {}".format(file_path, self.HOME))
-            print("{} -> {}".format(file_, dst_path))
+            if self.query:
+                print(f"Restore {dst_path} ?(y/[else]): ")
+                ans = self.getch()
+                if ans != "y":
+                    continue
 
+            if (not os.path.exists(dst_path)) and (not force):
+                print("{} not exists and is ignored, to force copy using -f")
+                continue
+
+            if os.path.isfile(local_path):
+                os.system("cp {} {}".format(local_path, self.HOME))
+            elif os.path.isdir(local_path):
+                os.system("cp -r {} {}".format(local_path, self.HOME))
+            print("{} -> {}".format(file_, dst_path))

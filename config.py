@@ -1,7 +1,7 @@
 file_path = [
         "~/.vimrc",
-        "~/.config/Code/User/settings.json",
-        "~/.bashrc",
-        "~/.zshrc",
-        "~/.profile"
+        "~/.tmux.conf",
+        "~/.config/nvim/init.vim",
+        "~/.config/nvim/coc-settings.json",
+        "~/init_machine"
         ]
