@@ -1,5 +1,4 @@
 
-
 " colorscheme evening
 
 "----------------My settings-----------------
@@ -38,6 +37,10 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set nobackup
+
+" for cross-terminal clipboard support
+set clipboard=unnamed
+set clipboard^=unnamedplus
 
 " File specific settings ===================================================={{{
 " https://stackoverflow.com/questions/158968/changing-vim-indentation-behavior-by-file-type
@@ -113,6 +116,18 @@ endfunc
 " to fix meta-keys which generate <Esc>a .. <Esc>z goto:
 " https://vim.fandom.com/wiki/Fix_meta-keys_that_break_out_of_Insert_mode
 "
+
+:noremap / :set hlsearch<CR>/
+
+" toggle paste mode
+:noremap <F2> :set paste! nopaste?<CR>
+
+" toggle number lines
+:noremap <F3> :set nonumber! nonumber?<CR>
+
+" toggle search highlights
+:noremap <F4> :set hlsearch! hlsearch?<CR>
+
 let mapleader=";;"
 nnoremap <c-t> :call TRelative()<cr>
 map <F5> :call CompileRunGcc()<CR>
@@ -127,11 +142,6 @@ nnoremap <right> <c-d>
 nnoremap <C-e> 2<C-e>
 nnoremap <C-y> 2<C-y>
 map <C-;> <Esc>
-" Keys to move on insert mode
-" inoremap <c-h> <left>
-" inoremap <c-j> <down>
-" inoremap <c-k> <up>
-" inoremap <c-l> <right>
 " Insert tag create pair tag from word before cursor.
 inoremap <C-t> <></><Esc>5hdiwp3lpT>i
 " Easier save
