@@ -2,6 +2,7 @@
 
 import os, platform
 import datetime
+from typing import List
 
 from config import file_path
 
@@ -86,7 +87,25 @@ class BasicConfig:
         """
         Check if 2 dirs have same content
         """
-        return False    ## TO DO LATER
+        f1s = cls.recursivelyFindFiles(d1)
+        f2s = cls.recursivelyFindFiles(d2)
+
+        def _relPath(pth: str, root_pth: str):
+            assert pth[:len(root_pth)] == root_pth
+            out = pth[len(root_pth):]
+            if out[0] == "/":
+                out = out[1:]
+            return out
+
+        if set([_relPath(f1, d1) for f1 in f1s ]) != set([_relPath(f2, d2) for f2 in f2s ]):
+            return False
+
+        for f1 in f1s:
+            rel_pth1 = _relPath(f1, d1)
+            f2 = os.path.join(d2, rel_pth1)
+            if not cls.fileSameContent(f1, f2):
+                return False
+        return True
 
     @classmethod
     def fileSameContent(cls, f1: str, f2: str) -> bool:
@@ -101,6 +120,18 @@ class BasicConfig:
             return True
         else:
             return False
+
+    @classmethod
+    def recursivelyFindFiles(cls, src_dir: str) -> List[str]:
+        assert os.path.isdir(src_dir)
+        out = []
+        for f in os.listdir(src_dir):
+            f_path = os.path.join(src_dir, f)
+            if os.path.isfile(f_path):
+                out.append(f_path)
+            else:
+                out += cls.recursivelyFindFiles(f_path)
+        return out
 
 class BackUp(BasicConfig):
     def __init__(self, query: bool = True):
