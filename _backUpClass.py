@@ -223,10 +223,10 @@ class Restore(BasicConfig):
                 return 
 
         if (not os.path.exists(dst_path)) and force:
-            print(" [+] {} -> {}".format(rel_path, dst_path))
+            print(" [+] {} -> {}".format(local_path, dst_path))
         else:
-            print(" [*] {} -> {}".format(rel_path, dst_path))
+            print(" [*] {} -> {}".format(local_path, dst_path))
         if os.path.isfile(local_path):
-            os.system("cp {} {}".format(local_path, self.HOME))
+            os.system("cp {} {}".format(local_path, dst_path))
         elif os.path.isdir(local_path):
-            os.system("cp -r {} {}".format(local_path, self.HOME))
+            os.system("cp -r {} {}".format(local_path, dst_path))
