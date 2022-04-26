@@ -219,8 +219,16 @@ smart_borders on
 # Activate smart borders (only when there are effectively no gaps)
 smart_borders no_gaps
 
+for_window [window_role="pop-up"]                       floating enable
+for_window [window_role="bubble"]                       floating enable 
+for_window [window_role="task_dialog"]                  floating enable
+for_window [window_role="Preferences"]                  floating enable
+for_window [window_type="dialog"]                       floating enable 
+for_window [window_type="menu"]                         floating enable
+
 # ---------------------------------------- Auto run
 exec feh --bg-fill Pictures/iceland-winters-4k-k5.jpg
+exec --no-startup-id "compton -b --config $HOME/.config/compton.conf"
 
 # ---------------------------------------- Bindings
 bindsym Mod4+w exec firefox

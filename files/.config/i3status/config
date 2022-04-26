@@ -1,0 +1,88 @@
+general {
+        colors = true
+        interval = 5
+        color_good = "#2AA198"
+        color_bad = "#586E75"
+        color_degraded = "#DC322F"
+}
+
+# order += "ipv6"
+## 显示cpu温度
+order += "cpu_temperature 0"
+order += "cpu_usage"
+## 取消显示硬盘使用情况
+#order += "disk /"
+# order += "disk /home"
+## 无线网络信息使用默认参数 _first_ 可能无法找到无线信息，这里直接制定我的无线网络的名称，可以使用 ip addr查看，相当于ifconfig
+# order += "wireless _first_"
+order += "wireless wlp3s0"
+#order += "ethernet _first_"
+# order += "load"
+order += "memory"
+order += "tztime local"
+order += "battery all"
+
+## 定制无线网络信息
+wireless wlp3s0 {
+    format_up = " %quality  %essid %ip"
+    format_down = "W: down"
+}
+
+cpu_usage {
+        format = "  %usage "
+}
+
+load {
+        format = " load %1min "
+        # max_threshold = 0.3
+}
+
+disk "/" {
+        # format = " hdd %avail "
+        format = " ⛁ %avail "
+}
+
+ethernet _first_ {
+# if you use %speed, i3status requires root privileges
+        format_up = " lan: %ip %speed "
+        format_down = " no lan "
+}
+
+battery all {
+        # format = "%status %percentage %remaining %emptytime"
+        format = " %status %percentage"
+        format_down = "No battery"
+        last_full_capacity = true
+        integer_battery_capacity = true
+        # status_chr = ""
+        status_chr = "⚡"
+        # status_bat = "bat"
+        # status_bat = "☉"
+        status_bat = ""
+        # status_unk = "?"
+        status_unk = ""
+        # status_full = ""
+        status_full = "☻"
+        low_threshold = 15
+        threshold_type = time
+}
+
+memory {
+        format = "MEM %used / %available"
+        threshold_degraded = "1G"
+        format_degraded = "MEMORY < %available"
+}
+
+## 日期改成自己喜欢的格式
+tztime local {
+        # format = "%Y-%m-%d %H:%M:%S"
+        format = " %m月-%d日 %H:%M "
+}
+
+
+## 定制温度控制器
+cpu_temperature 0 {
+        format = "CPU_TEMP %degrees °C"
+        max_threshold = 85
+        path = "/sys/class/thermal/thermal_zone0/temp"
+}
