@@ -1,11 +1,15 @@
 #!/usr/bin/python3
 
 import argparse
-from _backUpClass import BackUp, Restore
+from _backUpClass import BackUp, Restore, file_path
 
 parser = argparse.ArgumentParser(description="\
     Copy and restore files in config.py\
     ")
+parser.add_argument("-l", "--list", \
+    help = "list configuration and files in backup dir",\
+    action = "store_true")
+
 parser.add_argument("-b", "--backup", \
     help = "Backup files.",\
     action = "store_true")
@@ -36,6 +40,15 @@ parser.add_argument("-y", "--yes", \
 if __name__ == "__main__":
     args = parser.parse_args()
     b, r = BackUp(args.yes), Restore(args.yes)
+
+    if args.list:
+        def _printlst(ls: list):
+            for l in ls:
+                print(l)
+        print("=========CONFIG===========")
+        _printlst(file_path)
+        print("========BACKUP DIR=========")
+        _printlst(b.recursivelyFindFiles(b.backup_dir))
 
     if args.restore:
         r(args.push_pull, args.force)
