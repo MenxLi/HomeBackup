@@ -227,7 +227,7 @@ for_window [window_type="dialog"]                       floating enable
 for_window [window_type="menu"]                         floating enable
 
 # ---------------------------------------- Auto run
-exec feh --bg-fill Pictures/iceland-winters-4k-k5.jpg
+exec --no-startup-id feh --bg-fill Documents/Wallpapers/3.jpg
 exec --no-startup-id "compton -b --config $HOME/.config/compton.conf"
 
 # ---------------------------------------- Bindings
