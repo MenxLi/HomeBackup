@@ -43,8 +43,9 @@ class _GetchWindows:
 
 class BasicConfig:
     HOME = os.environ["HOME"]
+    src_dir = os.path.dirname(os.path.realpath(__file__))
     backup_dir = os.path.abspath(
-        os.path.join(os.path.dirname(os.path.realpath(__file__)), "files")
+        os.path.join(src_dir, "files")
         )
     getch = _Getch()
     def __init__(self):
@@ -143,6 +144,7 @@ class BackUp(BasicConfig):
             self.abs_path.append(p)
 
     def __call__(self, git = False, push = False, msg = ""):
+        os.chdir(self.src_dir)
         if not os.path.exists(self.backup_dir):
             print("Created directory: ", self.backup_dir)
             os.mkdir(self.backup_dir)
@@ -190,6 +192,7 @@ class Restore(BasicConfig):
     def __init__(self, query: bool = True):
         self.query = query
     def __call__(self, pull = False, force = False):
+        os.chdir(self.src_dir)
         if pull:
             os.system("git pull")
         for file_ in file_path:
