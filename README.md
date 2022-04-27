@@ -16,7 +16,6 @@ $ mkdir {/Path/ToStore/Backup/Files}
 $ cp HomeBackup/*.py {/Path/ToStore/Backup/Files}
 $ cd {/Path/ToStore/Backup/Files}
 $ sudo chmod 755 backUpHome.py
-$ # make soft link if desired.
 ```
 
 #### Usage
