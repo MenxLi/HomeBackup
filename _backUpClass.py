@@ -75,12 +75,13 @@ class BasicConfig:
 
     @classmethod
     def sameContent(cls, f1: str, f2: str):
-        #  print(f1, f2)
+        print(f1, f2)
         if os.path.isfile(f1) and os.path.isfile(f2):
             return cls.fileSameContent(f1, f2)
         elif os.path.isdir(f1) and os.path.isdir(f2):
             return cls.dirSameContent(f1, f2)
         else:
+            print("Type error")
             return False
 
     @classmethod
@@ -164,9 +165,13 @@ class BackUp(BasicConfig):
         if not os.path.exists(f_path):
             print(" [?] <{}> not exits".format(f_path))
             return
-        dst_path = os.path.dirname(f_path).replace(self.HOME, self.backup_dir)   # directory to store files
-        backup_file_path = os.path.join(dst_path, os.path.basename(f_path))
-        if os.path.exists(backup_file_path) and self.sameContent(backup_file_path, f_path):
+        dst_path = f_path.replace(self.HOME, self.backup_dir)
+        dst_dir = os.path.dirname(f_path).replace(self.HOME, self.backup_dir)   # directory to store files
+        if f_path.endswith(os.sep):
+            # os.dirname applied to <.../> will result in <...>
+            dst_dir = os.path.dirname(dst_dir)
+
+        if os.path.exists(dst_path) and self.sameContent(dst_path, f_path):
             print(f" [-] {f_path} same content as before, ignored. ")
             return
 
@@ -176,17 +181,18 @@ class BackUp(BasicConfig):
             if ans != "y":
                 return
         # Creat folder
-        if not os.path.exists(dst_path):
-            self.createFolder(dst_path)
+        dst_dir = os.path.abspath(dst_dir)
+        if not os.path.exists(dst_dir):
+            self.createFolder(dst_dir)
         # Print
-        if os.path.exists(backup_file_path):
-            print(" [*] <{}> Updated".format(backup_file_path))
-        else: print(" [+] <{}> Created".format(backup_file_path))
+        if os.path.exists(dst_path):
+            print(" [*] <{}> Updated".format(dst_path))
+        else: print(" [+] <{}> Created".format(dst_path))
         # Copy
         if os.path.isfile(f_path):
             os.system("cp {} {}".format(f_path, dst_path))
         elif os.path.isdir(f_path):
-            os.system("cp -r {} {}".format(f_path, dst_path))
+            os.system("cp -r {} {}".format(f_path, dst_dir))
 
 class Restore(BasicConfig):
     def __init__(self, query: bool = True):
