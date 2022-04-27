@@ -224,6 +224,7 @@ class Restore(BasicConfig):
 
         if (not os.path.exists(dst_path)) and force:
             print(" [+] {} -> {}".format(local_path, dst_path))
+            self.createFolder(os.path.dirname(dst_path))
         else:
             print(" [*] {} -> {}".format(local_path, dst_path))
         if os.path.isfile(local_path):
