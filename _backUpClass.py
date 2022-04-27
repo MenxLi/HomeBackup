@@ -210,6 +210,7 @@ class Restore(BasicConfig):
         """
         local_path = os.path.join(self.backup_dir, rel_path)
         dst_path = os.path.join(self.HOME, rel_path)
+
         if not os.path.exists(local_path):
             print(" [x] {} not exists in BACKUP and is ignored".format(dst_path))
             return
@@ -236,4 +237,7 @@ class Restore(BasicConfig):
         if os.path.isfile(local_path):
             os.system("cp {} {}".format(local_path, dst_path))
         elif os.path.isdir(local_path):
-            os.system("cp -r {} {}".format(local_path, dst_path))
+            dst_dir = os.path.dirname(dst_path)
+            if dst_path.endswith(os.sep):
+                dst_dir = os.path.dirname(dst_dir)
+            os.system("cp -r {} {}".format(local_path, dst_dir))
