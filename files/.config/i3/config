@@ -227,12 +227,12 @@ for_window [window_type="dialog"]                       floating enable
 for_window [window_type="menu"]                         floating enable
 
 # ---------------------------------------- Auto run
-exec --no-startup-id feh --bg-fill Documents/Wallpapers/3.jpg
+exec --no-startup-id feh --bg-fill ~/Documents/Wallpapers/3.jpg
 exec --no-startup-id "compton -b --config $HOME/.config/compton.conf"
+exec --no-startup-id ~/.nutstore/dist/bin/nutstore-pydaemon.py
 
 # ---------------------------------------- Bindings
 bindsym Mod4+w exec firefox
 bindsym Mod4+e exec nautilus
 bindsym Print       exec flameshot full
 bindsym Shift+Print exec flameshot gui
-
