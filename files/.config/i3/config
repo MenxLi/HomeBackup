@@ -228,11 +228,18 @@ for_window [window_type="menu"]                         floating enable
 
 # ---------------------------------------- Auto run
 exec --no-startup-id feh --bg-fill ~/Documents/Wallpapers/3.jpg
+exec --no-startup-id nm-applet
 exec --no-startup-id "compton -b --config $HOME/.config/compton.conf"
 exec --no-startup-id ~/.nutstore/dist/bin/nutstore-pydaemon.py
+# https://askubuntu.com/questions/763994
+exec --no-startup-id xset s off
+exec --no-startup-id xset s -dpms
 
 # ---------------------------------------- Bindings
 bindsym Mod4+w exec firefox
 bindsym Mod4+e exec nautilus
+bindsym Mod4+l exec systemctl suspend
 bindsym Print       exec flameshot full
 bindsym Shift+Print exec flameshot gui
+
+workspace_layout default
