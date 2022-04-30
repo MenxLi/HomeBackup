@@ -1,1 +1,1 @@
-i3-gaps feh flameshot nautilus compton NetworkManager-applet
+i3-gaps feh flameshot nautilus compton NetworkManager-applet ranger

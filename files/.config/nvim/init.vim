@@ -22,13 +22,13 @@ source ~/.vimrc
 " Plugins using vim-plug=============================={{{
 call plug#begin()
 Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
-Plug 'scrooloose/nerdtree'
+" Plug 'scrooloose/nerdtree'
+" Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+" Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
 Plug 'zhimsel/vim-stay'
 Plug 'tpope/vim-repeat'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'preservim/nerdcommenter'
 Plug 'tmhedberg/SimpylFold'
 Plug 'wesQ3/vim-windowswap'
@@ -54,6 +54,7 @@ Plug 'luochen1990/rainbow'
 " ==== Web dev
 Plug 'mattn/emmet-vim'
 Plug 'ap/vim-css-color'
+Plug 'valloric/MatchTagAlways'
 Plug 'heavenshell/vim-jsdoc', {
   \ 'for': ['javascript', 'javascript.jsx','typescript'],
   \ 'do': 'make install'
@@ -120,13 +121,13 @@ nnoremap ;F :NERDTreeToggle<cr>
 " show hidden files
 let NERDTreeShowHidden=1
 " close vim if the only window left open is a NERDTree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " Start NERDTree and put the cursor back in the other window.
-autocmd VimEnter * NERDTree | wincmd p
+" autocmd VimEnter * NERDTree | wincmd p
 " Exit Vim if NERDTree is the only window remaining in the only tab.
-autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+" autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 " Close the tab if NERDTree is the only window remaining in it.
-autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+" autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 " Nerdtree-git--------{{{
 let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ "Modified"  : "✹",
@@ -223,10 +224,14 @@ let g:user_emmet_leader_key=','
 " let g:tex_flavor = 'latex'}}}
 
 "{{{ jsdoc
-" nmap <silent> <C-l> <Plug>(jsdoc)
-au filetype javascript nmap <silent> <C-d> <Plug>(jsdoc)
+" nmap <silent> <c-l> <plug>(jsdoc)
+au filetype javascript nmap <silent> <c-d> <plug>(jsdoc)
 let g:jsdoc_lehre_path = "/home/monsoon/.nvm/versions/node/v16.14.0/bin/lehre"
 let g:jsdoc_formatter = "esdoc"
+"}}}
+
+"{{{ MatchTagAlways
+nnoremap <leader>% :MtaJumpToOtherTag<cr>
 "}}}
 
 " vim-snippets & ultisnips{{{
@@ -259,7 +264,8 @@ let g:coc_global_extensions = [
     \ 'coc-highlight',
     \ 'coc-tabnine',
     \ 'coc-texlab',
-    \ 'coc-snippets'
+    \ 'coc-snippets',
+    \ 'coc-explorer'
     \ ]
 
 "{{{ Default
@@ -400,7 +406,62 @@ endfunction
 let g:coc_snippet_next = '<tab>'
 "}}}
 
-" coc-fzf-preview
+" coc-explorer{{{
+nmap ;e [coc-explorer-prefix]
+nmap [coc-explorer-prefix] <Cmd>CocCommand explorer --preset floating<CR>
+let g:coc_explorer_global_presets = {
+\   '.vim': {
+\     'root-uri': '~/.vim',
+\   },
+\   'cocConfig': {
+\      'root-uri': '~/.config/coc',
+\   },
+\   'tab': {
+\     'position': 'tab',
+\     'quit-on-open': v:true,
+\   },
+\   'tab:$': {
+\     'position': 'tab:$',
+\     'quit-on-open': v:true,
+\   },
+\   'floating': {
+\     'position': 'floating',
+\     'open-action-strategy': 'sourceWindow',
+\   },
+\   'floatingTop': {
+\     'position': 'floating',
+\     'floating-position': 'center-top',
+\     'open-action-strategy': 'sourceWindow',
+\   },
+\   'floatingLeftside': {
+\     'position': 'floating',
+\     'floating-position': 'left-center',
+\     'floating-width': 50,
+\     'open-action-strategy': 'sourceWindow',
+\   },
+\   'floatingRightside': {
+\     'position': 'floating',
+\     'floating-position': 'right-center',
+\     'floating-width': 50,
+\     'open-action-strategy': 'sourceWindow',
+\   },
+\   'simplify': {
+\     'file-child-template': '[selection | clip | 1] [indent][icon | 1] [filename omitCenter 1]'
+\   },
+\   'buffer': {
+\     'sources': [{'name': 'buffer', 'expand': v:true}]
+\   },
+\ }
+
+" Use preset argument to open it
+nmap [coc-explorer-prefix]d <Cmd>CocCommand explorer --preset .vim<CR>
+nmap [coc-explorer-prefix]f <Cmd>CocCommand explorer --preset floating<CR>
+nmap [coc-explorer-prefix]c <Cmd>CocCommand explorer --preset cocConfig<CR>
+nmap [coc-explorer-prefix]b <Cmd>CocCommand explorer --preset buffer<CR>
+
+" List all presets
+nmap [coc-explorer-prefix]l <Cmd>CocList explPresets<CR>
+"}}}
 
 "-------------------------}}}
 

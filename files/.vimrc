@@ -64,6 +64,7 @@ au Filetype markdown setlocal autoindent
 
 " Html settings
 au Filetype html setlocal shiftwidth=4 softtabstop=4 expandtab
+au Filetype html setlocal foldmethod=syntax
 
 " Javascript settings
 au Filetype javascript setlocal shiftwidth=4 softtabstop=4 expandtab
