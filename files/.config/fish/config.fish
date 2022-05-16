@@ -11,8 +11,7 @@ fish_add_path -m $HOME/bin
 ### EXPORT ###
 set fish_greeting                                 # Supresses fish's intro message
 set TERM "xterm-256color"                         # Sets the terminal type
-set EDITOR "nvim"                 # $EDITOR use Emacs in terminal
-
+set EDITOR "nvim"                 # $EDITOR use neo-vim in terminal
 
 ### "nvim" as manpager
 # set -x MANPAGER "nvim -c 'set ft=man' -"
@@ -34,4 +33,6 @@ alias gp='git push origin'
 
 if status is-interactive
     # Commands to run in interactive sessions can go here
+    nvm use lts > /dev/null
+    source ~/Code/.venv/main_env/bin/activate.fish
 end

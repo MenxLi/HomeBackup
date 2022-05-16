@@ -408,7 +408,8 @@ let g:coc_snippet_next = '<tab>'
 
 " coc-explorer{{{
 nmap ;e [coc-explorer-prefix]
-nmap [coc-explorer-prefix] <Cmd>CocCommand explorer --preset floating<CR>
+nmap [coc-explorer-prefix] <Cmd>CocCommand explorer<CR>
+nmap [coc-explorer-prefix]e <Cmd>CocCommand explorer<CR>
 let g:coc_explorer_global_presets = {
 \   '.vim': {
 \     'root-uri': '~/.vim',
