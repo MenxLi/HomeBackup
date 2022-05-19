@@ -267,7 +267,7 @@ bindsym Mod1+Shift+Tab exec --no-startup-id i3-cycle-focus --reverse
 bindsym Mod4+w exec firefox
 bindsym Mod4+e exec nautilus
 bindsym Mod4+l exec systemctl suspend
-bindsym Mod4+space exec rofi -show run -lines 20 -eh 1.3 -opacity "85" -bw 0 -font "System San Francisco Display 10"
+bindsym Shift+space exec rofi -show run -lines 20 -eh 1.3 -opacity "85" -bw 0 -font "System San Francisco Display 10"
 bindsym Print       exec flameshot full
 bindsym Shift+Print exec flameshot gui
 
