@@ -263,6 +263,7 @@ let g:coc_global_extensions = [
     \ 'coc-json',
     \ 'coc-highlight',
     \ 'coc-tabnine',
+    \ 'coc-prettier',
     \ 'coc-texlab',
     \ 'coc-snippets',
     \ 'coc-explorer'
@@ -329,8 +330,8 @@ endfunction
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Formatting selected code.
-" xmap <leader>f  <Plug>(coc-format-selected)
-" nmap <leader>f  <Plug>(coc-format-selected)
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
 
 " Remap <C-f> and <C-b> for scroll float windows/popups.
 if has('nvim-0.4.0') || has('patch-8.2.0750')
@@ -405,6 +406,10 @@ endfunction
 
 let g:coc_snippet_next = '<tab>'
 "}}}
+
+" coc-prettier{{{
+command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
+" }}}
 
 " coc-explorer{{{
 nmap ;e [coc-explorer-prefix]

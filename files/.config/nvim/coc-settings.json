@@ -30,7 +30,10 @@
     ],
     "python.venvPath":"~/Code/.venv",
     "python.analysis.stubPath":"/home/monsoon/Documents/Code/.pystub/python-type-stubs",
-    "python.formatting.provider": "autopep8",
+    // "python.formatting.provider": "autopep8",
+    // "python.formatting.blackArgs": [
+    //     "--skip-string-normalization"
+    // ],
 
     // coc-explorer
     "explorer.icon.enableNerdfont": true,
