@@ -29,7 +29,7 @@
         "--disable=C0116"
     ],
     "python.venvPath":"~/Code/.venv",
-    "python.analysis.stubPath":"/home/monsoon/Documents/Code/.pystub/python-type-stubs",
+    "python.analysis.stubPath":"/Users/monsoon/Code/.pystubs",
     // "python.formatting.provider": "autopep8",
     // "python.formatting.blackArgs": [
     //     "--skip-string-normalization"

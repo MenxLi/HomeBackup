@@ -41,7 +41,8 @@ Plug 'junegunn/fzf.vim'
 Plug 'sheerun/vim-polyglot'
 " ==== Beautify
 Plug 'flazz/vim-colorschemes'
-" Plug 'morhetz/gruvbox'
+Plug 'morhetz/gruvbox'
+Plug 'sonph/onehalf'
 Plug 'rakr/vim-one'
 Plug 'sainnhe/sonokai'
 Plug 'tomasiser/vim-code-dark'
@@ -89,16 +90,22 @@ if (empty($TMUX))
   "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
   "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
   " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
-  if (has("termguicolors"))
-    set termguicolors
-  endif
+  " if (has("termguicolors"))
+    " set termguicolors
+  " endif
 endif
+" For mac!
+" https://stackoverflow.com/questions/49408010/
+" set notermguicolors
 
 set background=dark
 " colorscheme zenburn
 " colorscheme gruvbox
 colorscheme sonokai
 " colorscheme codedark
+" colorscheme monokai
+" colorscheme badwolf
+" colorscheme tender
 let g:one_allow_italics = 1
 "}}}
 

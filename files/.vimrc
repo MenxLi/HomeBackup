@@ -46,6 +46,9 @@ set clipboard^=unnamedplus
 " https://stackoverflow.com/questions/158968/changing-vim-indentation-behavior-by-file-type
 autocmd FileType vim,txt setlocal foldmethod=marker
 
+" treat json as jsonc
+autocmd BufRead,BufNewFile *.json set filetype=jsonc
+
 " Python settings
 let python_highlight_all=1
 au Filetype python setlocal tabstop=4
@@ -148,5 +151,12 @@ inoremap <C-t> <></><Esc>5hdiwp3lpT>i
 " Easier save
 inoremap ;;s <Esc>:w<cr>a
 nnoremap ;;s <Esc>:w<cr>
+
+" Terminal mapping
+command! -nargs=* T split | terminal <args>
+command! -nargs=* VT vsplit | terminal <args>
+command! -nargs=* TT tabedit | terminal <args>
+tnoremap <leader>d <C-\><C-n>
+tnoremap <Esc> <C-\><C-n>
 "}}}
 
