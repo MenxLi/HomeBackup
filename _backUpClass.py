@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 
+import difflib
+
 import os, platform
 import datetime
 from typing import List
@@ -40,6 +42,37 @@ class _GetchWindows:
     def __call__(self):
         import msvcrt
         return msvcrt.getch()
+
+class DiffViewer:
+    def __init__(self, file1: str, file2: str) -> None:
+        """
+        file1: original
+        file2: new
+        """
+        if os.path.isdir(file1) or os.path.isdir(file2):
+            self.diff_lines = ["Can't compare directories"]
+            return
+
+        with open(file1, "r") as fp:
+            lines_1 = fp.readlines()
+        with open(file2, "r") as fp:
+            lines_2 = fp.readlines()
+        self.diff_lines = difflib.unified_diff(lines_1, lines_2)
+
+    def show(self):
+        for line in self.diff_lines:
+            if line.startswith("+"):
+                self.prGreen(line)
+            elif line.startswith("-"):
+                self.prRed(line)
+            else:
+                print(line)
+
+    @staticmethod
+    def prRed(skk): print("\033[91m {}\033[00m" .format(skk))
+     
+    @staticmethod
+    def prGreen(skk): print("\033[92m {}\033[00m" .format(skk))
 
 class BasicConfig:
     HOME = os.environ["HOME"]
@@ -176,10 +209,20 @@ class BackUp(BasicConfig):
             return
 
         if self.query:
-            print(f"Backup {f_path} ?(y/[else]): ")
-            ans = self.getch()
-            if ans != "y":
-                return
+            while(1):
+                print(f"Backup {f_path} ?(y(es)/d(iff)/q(uit)/[else]): ")
+                ans = self.getch()
+                if ans == "y":
+                    break
+                if ans == "q":
+                    print("abort in the middle of backing up.")
+                    exit()
+                if ans == "d":
+                    viewer = DiffViewer(dst_path, f_path)
+                    viewer.show()
+                else:
+                    return
+
         # Creat folder
         dst_dir = os.path.abspath(dst_dir)
         if not os.path.exists(dst_dir):
@@ -224,10 +267,19 @@ class Restore(BasicConfig):
             return
 
         if self.query:
-            print(f"Restore {dst_path} ?(y/[else]): ")
-            ans = self.getch()
-            if ans != "y":
-                return 
+            while(1):
+                print(f"Restore {dst_path} ?(y(es)/d(iff)/q(uit)/[else]): ")
+                ans = self.getch()
+                if ans == "y":
+                    break
+                if ans == "q":
+                    print("abort in the middle of restoring files.")
+                    exit()
+                if ans == "d":
+                    viewer = DiffViewer(dst_path, local_path)
+                    viewer.show()
+                else:
+                    return
 
         if (not os.path.exists(dst_path)) and force:
             print(" [+] {} -> {}".format(local_path, dst_path))
