@@ -49,6 +49,9 @@ autocmd FileType vim,txt setlocal foldmethod=marker
 " treat json as jsonc
 autocmd BufRead,BufNewFile *.json set filetype=jsonc
 
+" GLSL support
+autocmd! BufNewFile,BufRead *.vs,*.fs set filetype=glsl
+
 " Python settings
 let python_highlight_all=1
 au Filetype python setlocal tabstop=4
