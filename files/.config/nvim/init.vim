@@ -273,7 +273,8 @@ let g:coc_global_extensions = [
     \ 'coc-prettier',
     \ 'coc-texlab',
     \ 'coc-snippets',
-    \ 'coc-explorer'
+    \ 'coc-explorer',
+    \ 'coc-clangd',
     \ ]
 
 "{{{ Default
